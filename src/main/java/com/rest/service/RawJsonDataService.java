@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rest.model.EmployeeDetails;
 import com.rest.model.RefData;
+import com.rest.model.RefDataPast;
 import com.rest.repository.RawJsonDataRepository;
+import com.rest.repository.RefDataPastRepository;
 import com.rest.repository.RefDataRepository;
 
 @Service
@@ -17,6 +19,8 @@ public class RawJsonDataService {
 	private RawJsonDataRepository rawJsonDataRepository;
 	@Autowired
 	private RefDataRepository refDataRepository;
+	@Autowired
+	private RefDataPastRepository refDataPastRepository;
 
 	public List<EmployeeDetails> fetchRawJsonData() {
 		List<EmployeeDetails> employeeDetails = rawJsonDataRepository.findAll();
@@ -29,4 +33,9 @@ public class RawJsonDataService {
 		return refData;
 	}
 	 
+	public List<RefDataPast> fetchFileByPastDate(Date date) {
+		List<RefDataPast> refDataPast =  (List<RefDataPast>) refDataPastRepository.findByDateCreated(date);
+		System.out.println(refDataPast);
+		return refDataPast;
+	}
 }

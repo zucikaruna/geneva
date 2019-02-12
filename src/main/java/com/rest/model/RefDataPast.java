@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="refdata")
-public class RefData {
+@Table(name="refdata_24")
+public class RefDataPast {
 	
 	public static String tableName;
 	 	@Id
