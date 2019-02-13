@@ -3,24 +3,19 @@ package com.rest.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rest.model.EmployeeDetails;
+import com.rest.model.Collection;
 import com.rest.model.RefData;
 import com.rest.model.RefDataPast;
 import com.rest.service.RawJsonDataService;
 import com.rest.util.WriteDataToCSV;
-
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,21 +30,21 @@ public class RawJsonData {
 	
 	
 	@GetMapping("/fetch/esh9")
-	public ResponseEntity<byte[]> fetchRawJsonData() throws Exception {
+	public List<Collection> fetchRawJsonData() throws Exception {
 
-		List<EmployeeDetails> employeeDetails = rawJsonDataService.fetchRawJsonData();
-		if (!employeeDetails.isEmpty()) {
+		List<Collection> collection = rawJsonDataService.fetchRawJsonData();
+		if (!collection.isEmpty()) {
 			ObjectMapper objectMapper = new ObjectMapper();
-			String json = objectMapper.writeValueAsString(employeeDetails);
+			String json = objectMapper.writeValueAsString(collection);
 			byte[] isr = json.getBytes();
-			String fileName = "employees.json";
+			String fileName = "collection.json";
 			HttpHeaders respHeaders = new HttpHeaders();
 			respHeaders.setContentLength(isr.length);
 			respHeaders.setContentType(new MediaType("text", "json"));
 			respHeaders.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 			respHeaders.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
-			return new ResponseEntity<byte[]>(isr, respHeaders, HttpStatus.OK);
-			//return employeeDetails;
+			//return new ResponseEntity<byte[]>(isr, respHeaders, HttpStatus.OK);
+			return collection;
 		} else {
 			throw new Exception("Employee Details not found");
 		}

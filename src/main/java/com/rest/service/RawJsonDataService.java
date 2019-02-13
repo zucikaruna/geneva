@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.rest.model.EmployeeDetails;
+import com.rest.model.Collection;
 import com.rest.model.RefData;
 import com.rest.model.RefDataPast;
 import com.rest.repository.RawJsonDataRepository;
@@ -22,9 +22,9 @@ public class RawJsonDataService {
 	@Autowired
 	private RefDataPastRepository refDataPastRepository;
 
-	public List<EmployeeDetails> fetchRawJsonData() {
-		List<EmployeeDetails> employeeDetails = rawJsonDataRepository.findAll();
-	    return employeeDetails;
+	public List<Collection> fetchRawJsonData() {
+		List<Collection> collection = rawJsonDataRepository.findAll();
+	    return collection;
 	}
 
 	public List<RefData> fetchFileByDate(Date date) {
