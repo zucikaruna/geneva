@@ -48,7 +48,7 @@ public class WriteDataToCSV {
 		try (
 			CSVWriter csvWriter = new CSVWriter(writer,
 		                CSVWriter.DEFAULT_SEPARATOR,
-		                CSVWriter.NO_QUOTE_CHARACTER,
+		                CSVWriter.DEFAULT_QUOTE_CHARACTER,
 		                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
 		                CSVWriter.DEFAULT_LINE_END);
 		){
@@ -63,7 +63,7 @@ public class WriteDataToCSV {
 			
 			beanToCsv = new StatefulBeanToCsvBuilder<RefData>(writer)
 					.withMappingStrategy(mappingStrategy)
-	                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+	                .withQuotechar(CSVWriter.DEFAULT_QUOTE_CHARACTER)
 	                .build();
  
 			beanToCsv.write(refDataList);
@@ -81,7 +81,7 @@ public class WriteDataToCSV {
 		try (
 			CSVWriter csvWriter = new CSVWriter(writer,
 		                CSVWriter.DEFAULT_SEPARATOR,
-		                CSVWriter.NO_QUOTE_CHARACTER,
+		                CSVWriter.DEFAULT_QUOTE_CHARACTER,
 		                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
 		                CSVWriter.DEFAULT_LINE_END);
 		){
@@ -96,7 +96,7 @@ public class WriteDataToCSV {
 			
 			beanToCsv = new StatefulBeanToCsvBuilder<RefDataPast>(writer)
 					.withMappingStrategy(mappingStrategy)
-	                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+	                .withQuotechar(CSVWriter.DEFAULT_QUOTE_CHARACTER)
 	                .build();
  
 			beanToCsv.write(refDataList);
